@@ -21,7 +21,7 @@ Validator.Address.prototype = {
     if (postCode === undefined) { return false; }
 
     // 正規表現リテラル
-    return /[0-9]{3}-[0-9]{4}/.test(postCode);
+    return (/[0-9]{3}-[0-9]{4}/).test(postCode);
   },
 };
 

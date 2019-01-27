@@ -21,7 +21,7 @@ Validator.Url.prototype = {
     if (url === undefined) { return false; }
 
     // 正規表現リテラル
-    return /^https/.test(url);
+    return (/^https/).test(url);
   },
 };
 
