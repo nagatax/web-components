@@ -1,7 +1,7 @@
 /**
  * @namespace
  */
-var Validator = Validator || {};
+let Validator = Validator || {};
 
 /**
  * @constructor
