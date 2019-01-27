@@ -19,6 +19,18 @@ describe('Validator', function() {
       // pass
     });
 
+    it('isUrlFormat OK Pattern http', function() {
+      expect(_sut.isUrlFormat("http://example.co.jp")).toEqual(true);
+    });
+
+    it('isUrlFormat OK Pattern https', function() {
+      expect(_sut.isUrlFormat("https://example.co.jp")).toEqual(true);
+    });
+
+    it('isUrlFormat NG Pattern', function() {
+      expect(_sut.isUrlFormat("example.co.jp")).toEqual(false);
+    });
+
     it('isHttps OK Pattern', function() {
       expect(_sut.isHttps("https://example.co.jp")).toEqual(true);
     });
