@@ -5,9 +5,9 @@ const base = require('./webpack.base.js');
 module.exports = merge(base, {
   // 実行モード
   mode: 'development',
-  // module: {
-  //   rules: [],
-  // },
+  module: {
+    rules: [],
+  },
   // 開発サーバーの設定
   devServer: {
     contentBase: './dist',
