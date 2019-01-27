@@ -7,16 +7,20 @@ let Value = Value || {};
  * @constructor
  * @classdesc 日付/時刻関連の
  */
-Value.Date.prototype = {
-  WEEK: {
-    SUNDAY: Symbol(),
-    MONDAY: Symbol(),
-    TUESDAY: Symbol(),
-    WEDNESDAY: Symbol(),
-    THURSDAY: Symbol(),
-    FRIDAY: Symbol(),
-    SATURDAY: Symbol(),
-  },
+Value.Date = function () {};
+
+/**
+ * 曜日
+ */
+Value.Date.WEEK = {
+  SUNDAY: Symbol('sunday'),
+  MONDAY: Symbol('monday'),
+  TUESDAY: Symbol('tuesday'),
+  WEDNESDAY: Symbol('wednesday'),
+  THURSDAY: Symbol('thursday'),
+  FRIDAY: Symbol('friday'),
+  SATURDAY: Symbol('saturday'),
 };
 
-module.exports = Value;
+// エクスポート
+module.exports = Value.Date;
