@@ -34,8 +34,8 @@ module.exports = {
             options: {
               // autofixモード
               fix: false,
-              // ビルド検出時にビルドを中断
-              failOnError: true,
+              // エラー検出時にビルドを中断
+              failOnError: false,
             },
           },
         ],
