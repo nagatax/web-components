@@ -21,7 +21,8 @@ Validator.Address.prototype = {
     if (postCode === undefined) { return false; }
 
     // 正規表現リテラル
-    return (/[0-9]{3}-[0-9]{4}/).test(postCode);
+    return (/\d{3}-\d{4}/).test(postCode);
+  },
   /**
    * 日付の形式か判定する
    * yyyy/mm/dd形式か判定
