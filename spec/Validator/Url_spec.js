@@ -1,42 +1,43 @@
-describe('Validator', function() {
-  describe('Url', function() {
+var Validator = require('../../src/Validator/Url');
 
+describe('Validator', () => {
+  describe('Url', () => {
     /** {Validator.Url} */
     var _sut;
 
     /**
      * 初期化処理
      */
-    beforeEach(function() {
-      var Validator = require('../../src/Validator/Url');
+    beforeEach(() => {
       _sut = new Validator.Url();
     });
 
     /**
      * 事後処理
      */
-    afterEach(function() {
+    afterEach(() => {
       // pass
     });
 
-    it('isUrlFormat OK Pattern http', function() {
-      expect(_sut.isUrlFormat("http://example.co.jp")).toEqual(true);
+    describe('isUrlFormat', () => {
+      it('OK Pattern http', () => {
+        expect(_sut.isUrlFormat('http://example.co.jp')).toEqual(true);
+      });
+      it('OK Pattern https', () => {
+        expect(_sut.isUrlFormat('https://example.co.jp')).toEqual(true);
+      });
+      it('NG Pattern', () => {
+        expect(_sut.isUrlFormat('example.co.jp')).toEqual(false);
+      });
     });
 
-    it('isUrlFormat OK Pattern https', function() {
-      expect(_sut.isUrlFormat("https://example.co.jp")).toEqual(true);
+    describe('isHttps', () => {
+      it('OK Pattern', () => {
+        expect(_sut.isHttps('https://example.co.jp')).toEqual(true);
+      });
+      it('NG Pattern', () => {
+        expect(_sut.isHttps('http://example.co.jp')).toEqual(false);
+      });
     });
-
-    it('isUrlFormat NG Pattern', function() {
-      expect(_sut.isUrlFormat("example.co.jp")).toEqual(false);
-    });
-
-    it('isHttps OK Pattern', function() {
-      expect(_sut.isHttps("https://example.co.jp")).toEqual(true);
-    });
-
-    it('isHttps NG Pattern', function() {
-      expect(_sut.isHttps("http://example.co.jp")).toEqual(false);
-    });
-  })
+  });
 });
