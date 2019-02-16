@@ -9,7 +9,7 @@ var Validator = Validator || {};
 Validator.Function = function () {
 };
 
-Validator.Function = {
+Validator.Function.prototype = {
   /**
    * 関数の引数チェック
    * 引数の必須項目のデフォルト値として設定する
