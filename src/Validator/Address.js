@@ -7,7 +7,8 @@ var Validator = Validator || {};
  * @constructor
  * @classdesc 住所のバリデーション
  */
-Validator.Address = function () {};
+Validator.Address = function () {
+};
 
 Validator.Address.prototype = {
 
@@ -18,7 +19,9 @@ Validator.Address.prototype = {
    */
   isValidPostCode(postCode) {
     // check input value
-    if (postCode === undefined) { return false; }
+    if (postCode === undefined) {
+      return false;
+    }
 
     // 正規表現リテラル
     return (/\d{3}-\d{4}/).test(postCode);
@@ -31,7 +34,9 @@ Validator.Address.prototype = {
    */
   isValidDateUsingSlash(date) {
     // check input value
-    if (date === undefined) { return false; }
+    if (date === undefined) {
+      return false;
+    }
 
     // 正規表現リテラル
     return (/\d{4}\/\d{1,2}\/\d{1,2}/).test(date);
@@ -44,7 +49,9 @@ Validator.Address.prototype = {
    */
   isValidDateUsingHyphen(date) {
     // check input value
-    if (date === undefined) { return false; }
+    if (date === undefined) {
+      return false;
+    }
 
     // 正規表現リテラル
     return (/\d{4}-\d{1,2}-\d{1,2}/).test(date);
@@ -57,7 +64,9 @@ Validator.Address.prototype = {
    */
   isValidDateUsingDot(date) {
     // check input value
-    if (date === undefined) { return false; }
+    if (date === undefined) {
+      return false;
+    }
 
     // 正規表現リテラル
     return (/\d{4}\.\d{1,2}\.\d{1,2}/).test(date);

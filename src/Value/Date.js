@@ -7,7 +7,8 @@ let Value = Value || {};
  * @constructor
  * @classdesc 日付/時刻関連の
  */
-Value.Date = function () {};
+Value.Date = function () {
+};
 
 /**
  * 曜日

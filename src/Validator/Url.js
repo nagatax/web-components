@@ -7,7 +7,8 @@ var Validator = Validator || {};
  * @constructor
  * @classdesc URLのバリデーション
  */
-Validator.Url = function () {};
+Validator.Url = function () {
+};
 
 Validator.Url.prototype = {
   /**
@@ -17,7 +18,9 @@ Validator.Url.prototype = {
    */
   isUrlFormat(url) {
     // check input value
-    if (url === undefined) { return false; }
+    if (url === undefined) {
+      return false;
+    }
 
     return (/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/).test(url);
   },
@@ -28,7 +31,9 @@ Validator.Url.prototype = {
    */
   isHttps(url) {
     // check input value
-    if (url === undefined) { return false; }
+    if (url === undefined) {
+      return false;
+    }
 
     // 正規表現リテラル
     return (/^https/).test(url);
