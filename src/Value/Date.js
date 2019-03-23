@@ -5,7 +5,7 @@ let Value = Value || {};
 
 /**
  * @constructor
- * @classdesc 日付/時刻関連の
+ * @classdesc 日付/時刻関連の処理
  */
 Value.Date = function () {
 };
