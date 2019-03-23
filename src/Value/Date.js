@@ -1,7 +1,7 @@
 /**
  * @namespace
  */
-let Value = Value || {};
+var Value = Value || {};
 
 /**
  * @constructor
