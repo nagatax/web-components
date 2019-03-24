@@ -1,34 +1,36 @@
-var Validator = require('../../src/Util/Math');
+import UtilMath from '../../src/Util/Math';
 
-describe('Validator', () => {
-  describe('String', () => {
-    /** {Util.Math} */
-    var _sut;
+// jasmine-es6のロード
+import install from 'jasmine-es6';
+install();
 
-    /**
-     * 初期化処理
-     */
-    beforeEach(() => {
-      _sut = new Validator.Math();
+describe('Mathクラスのテスト', () => {
+  /** {Util.Math} */
+  const sut = new UtilMath();
+
+  /**
+   * 初期化処理
+   */
+  beforeEach(() => {
+    // pass
+  });
+
+  /**
+   * 事後処理
+   */
+  afterEach(() => {
+    // pass
+  });
+
+  describe('factorial関数のテスト', () => {
+    it('OK Pattern 5の階乗は120になること', () => {
+      expect(sut.factorial(5)).toEqual(120);
     });
-
-    /**
-     * 事後処理
-     */
-    afterEach(() => {
-      // pass
+    it('OK Pattern 1の階乗は1になること', () => {
+      expect(sut.factorial(1)).toEqual(1);
     });
-
-    describe('factorial', () => {
-      it('OK Pattern 5の階乗は120になること', () => {
-        expect(_sut.factorial(5)).toEqual(120);
-      });
-      it('OK Pattern 1の階乗は1になること', () => {
-        expect(_sut.factorial(1)).toEqual(1);
-      });
-      it('NG Pattern 負の数の階乗はNULLになること', () => {
-        expect(_sut.factorial(-1)).toBeNull();
-      });
+    it('NG Pattern 負の数の階乗はNULLになること', () => {
+      expect(sut.factorial(-1)).toBeUndefined();
     });
   });
 });

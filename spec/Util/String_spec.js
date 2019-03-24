@@ -1,34 +1,37 @@
-var Validator = require('../../src/Util/String');
+import UtilString from '../../src/Util/String';
 
-describe('Validator', () => {
-  describe('String', () => {
-    /** {Util.String} */
-    var _sut;
+// jasmine-es6のロード
+import install from 'jasmine-es6';
 
-    /**
-     * 初期化処理
-     */
-    beforeEach(() => {
-      _sut = new Validator.String();
+install();
+
+describe('Stringクラスのテスト', () => {
+  /** {Util.String} */
+  const sut = new UtilString();
+
+  /**
+   * 初期化処理
+   */
+  beforeEach(() => {
+    // pass
+  });
+
+  /**
+   * 事後処理
+   */
+  afterEach(() => {
+    // pass
+  });
+
+  describe('getLength関数のテスト', () => {
+    it('OK Pattern', () => {
+      expect(sut.getLength('良')).toEqual(1);
     });
-
-    /**
-     * 事後処理
-     */
-    afterEach(() => {
-      // pass
+    it('OK Pattern サロゲートペア', () => {
+      expect(sut.getLength('𠮟る')).toEqual(2);
     });
-
-    describe('getLength', () => {
-      it('OK Pattern', () => {
-        expect(_sut.getLength('良')).toEqual(1);
-      });
-      it('OK Pattern サロゲートペア', () => {
-        expect(_sut.getLength('𠮟る')).toEqual(2);
-      });
-      it('NG Pattern', () => {
-        expect(_sut.getLength(1)).toEqual(null);
-      });
+    it('NG Pattern', () => {
+      expect(sut.getLength(1)).toEqual(null);
     });
   });
 });

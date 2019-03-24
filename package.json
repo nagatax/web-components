@@ -44,5 +44,8 @@
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "jasmine-es6": "^0.4.3"
   }
 }

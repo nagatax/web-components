@@ -1,37 +1,40 @@
-var Validator = require('../../src/Validator/Common');
+import ValidatorCommon from '../../src/Validator/Common';
 
-describe('Validator', () => {
-  describe('Common', () => {
-    /** {Validator.Common} */
-    var _sut;
+// jasmine-es6のロード
+import install from 'jasmine-es6';
 
-    /**
-     * 初期化処理
-     */
-    beforeEach(() => {
-      _sut = new Validator.Common();
+install();
+
+describe('Commonクラスのテスト', () => {
+  /** {Validator.Common} */
+  const sut = new ValidatorCommon();
+
+  /**
+   * 初期化処理
+   */
+  beforeEach(() => {
+    // pass
+  });
+
+  /**
+   * 事後処理
+   */
+  afterEach(() => {
+    // pass
+  });
+
+  describe('isContainString関数のテスト', () => {
+    it('OK Pattern pre', () => {
+      expect(sut.isContainString('javascript', 'java')).toEqual(true);
     });
-
-    /**
-     * 事後処理
-     */
-    afterEach(() => {
-      // pass
+    it('OK Pattern middle', () => {
+      expect(sut.isContainString('javascript', 'vasc')).toEqual(true);
     });
-
-    describe('isContainString', () => {
-      it('OK Pattern pre', () => {
-        expect(_sut.isContainString('javascript', 'java')).toEqual(true);
-      });
-      it('OK Pattern middle', () => {
-        expect(_sut.isContainString('javascript', 'vasc')).toEqual(true);
-      });
-      it('OK Pattern post', () => {
-        expect(_sut.isContainString('javascript', 'script')).toEqual(true);
-      });
-      it('NG Pattern', () => {
-        expect(_sut.isContainString('javascript', 'bad string')).toEqual(false);
-      });
+    it('OK Pattern post', () => {
+      expect(sut.isContainString('javascript', 'script')).toEqual(true);
+    });
+    it('NG Pattern', () => {
+      expect(sut.isContainString('javascript', 'bad string')).toEqual(false);
     });
   });
 });

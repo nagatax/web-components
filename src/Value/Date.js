@@ -1,19 +1,7 @@
 /**
- * @namespace
- */
-var Value = Value || {};
-
-/**
- * @constructor
- * @classdesc 日付/時刻関連の処理
- */
-Value.Date = function () {
-};
-
-/**
  * 曜日
  */
-Value.Date.WEEK = {
+const WEEK = {
   SUNDAY: Symbol('sunday'),
   MONDAY: Symbol('monday'),
   TUESDAY: Symbol('tuesday'),
@@ -22,6 +10,3 @@ Value.Date.WEEK = {
   FRIDAY: Symbol('friday'),
   SATURDAY: Symbol('saturday'),
 };
-
-// エクスポート
-module.exports = Value.Date;

@@ -1,17 +1,4 @@
-/**
- * @namespace
- */
-var Util = Util || {};
-
-/**
- * @constructor
- * @classdesc 文字列に関する処理
- */
-Util.String = function () {
-};
-
-Util.String.prototype = {
-
+export default class String {
   /**
    * 文字数を取得する
    * @param {string} str
@@ -22,7 +9,5 @@ Util.String.prototype = {
       return null;
     }
     return str.split(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g).length;
-  },
-};
-
-module.exports = Util;
+  }
+}

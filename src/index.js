@@ -1,14 +1,4 @@
-const name = 'webpack';
-console.log(`こんにちは、${name}!`);
-console.log(0b11 === 3);
+import Ajax from './Util/Ajax';
 
-// import { APP_NAME, hello, Figure } from '../myutil';
-
-// console.log(APP_NAME);
-// hello();
-// console.log(Figure.getTriangle(10, 5));
-// console.log(Figure.getTriangle(30, 10));
-
-// import './style.css';
-// let body = document.getElementsByTagName('body')[0];
-// body.classList.add('sky');
+const ajax = new Ajax('http://192.168.34.50/index.php');
+ajax.send();

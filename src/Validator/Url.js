@@ -1,16 +1,4 @@
-/**
- * @namespace
- */
-var Validator = Validator || {};
-
-/**
- * @constructor
- * @classdesc URLのバリデーション
- */
-Validator.Url = function () {
-};
-
-Validator.Url.prototype = {
+export default class Url {
   /**
    * URLの形式か判定する
    * @param {string} url
@@ -23,7 +11,8 @@ Validator.Url.prototype = {
     }
 
     return (/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/).test(url);
-  },
+  }
+
   /**
    * httpsのURLか判定する
    * @param {string} url
@@ -37,7 +26,5 @@ Validator.Url.prototype = {
 
     // 正規表現リテラル
     return (/^https/).test(url);
-  },
-};
-
-module.exports = Validator;
+  }
+}

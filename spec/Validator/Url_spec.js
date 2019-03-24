@@ -1,43 +1,46 @@
-var Validator = require('../../src/Validator/Url');
+import ValidatorUrl from '../../src/Validator/Url';
 
-describe('Validator', () => {
-  describe('Url', () => {
-    /** {Validator.Url} */
-    var _sut;
+// jasmine-es6のロード
+import install from 'jasmine-es6';
 
-    /**
-     * 初期化処理
-     */
-    beforeEach(() => {
-      _sut = new Validator.Url();
+install();
+
+describe('Urlクラスのテスト', () => {
+  /** {Validator.Url} */
+  const sut = new ValidatorUrl();
+
+  /**
+   * 初期化処理
+   */
+  beforeEach(() => {
+    // pass
+  });
+
+  /**
+   * 事後処理
+   */
+  afterEach(() => {
+    // pass
+  });
+
+  describe('isUrlFormat関数のテスト', () => {
+    it('OK Pattern http', () => {
+      expect(sut.isUrlFormat('http://example.co.jp')).toEqual(true);
     });
-
-    /**
-     * 事後処理
-     */
-    afterEach(() => {
-      // pass
+    it('OK Pattern https', () => {
+      expect(sut.isUrlFormat('https://example.co.jp')).toEqual(true);
     });
-
-    describe('isUrlFormat', () => {
-      it('OK Pattern http', () => {
-        expect(_sut.isUrlFormat('http://example.co.jp')).toEqual(true);
-      });
-      it('OK Pattern https', () => {
-        expect(_sut.isUrlFormat('https://example.co.jp')).toEqual(true);
-      });
-      it('NG Pattern', () => {
-        expect(_sut.isUrlFormat('example.co.jp')).toEqual(false);
-      });
+    it('NG Pattern', () => {
+      expect(sut.isUrlFormat('example.co.jp')).toEqual(false);
     });
+  });
 
-    describe('isHttps', () => {
-      it('OK Pattern', () => {
-        expect(_sut.isHttps('https://example.co.jp')).toEqual(true);
-      });
-      it('NG Pattern', () => {
-        expect(_sut.isHttps('http://example.co.jp')).toEqual(false);
-      });
+  describe('isHttps関数のテスト', () => {
+    it('OK Pattern', () => {
+      expect(sut.isHttps('https://example.co.jp')).toEqual(true);
+    });
+    it('NG Pattern', () => {
+      expect(sut.isHttps('http://example.co.jp')).toEqual(false);
     });
   });
 });

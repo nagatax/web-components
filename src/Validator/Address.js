@@ -1,17 +1,4 @@
-/**
- * @namespace
- */
-var Validator = Validator || {};
-
-/**
- * @constructor
- * @classdesc 住所のバリデーション
- */
-Validator.Address = function () {
-};
-
-Validator.Address.prototype = {
-
+export default class Address {
   /**
    * 郵便番号か判定する
    * @param {string} postCode
@@ -25,7 +12,8 @@ Validator.Address.prototype = {
 
     // 正規表現リテラル
     return (/\d{3}-\d{4}/).test(postCode);
-  },
+  }
+
   /**
    * 日付の形式か判定する
    * yyyy/mm/dd形式か判定
@@ -40,7 +28,8 @@ Validator.Address.prototype = {
 
     // 正規表現リテラル
     return (/\d{4}\/\d{1,2}\/\d{1,2}/).test(date);
-  },
+  }
+
   /**
    * 日付の形式か判定する
    * yyyy-mm-dd形式か判定
@@ -55,7 +44,8 @@ Validator.Address.prototype = {
 
     // 正規表現リテラル
     return (/\d{4}-\d{1,2}-\d{1,2}/).test(date);
-  },
+  }
+
   /**
    * 日付の形式か判定する
    * yyyy.mm.dd形式か判定
@@ -70,7 +60,5 @@ Validator.Address.prototype = {
 
     // 正規表現リテラル
     return (/\d{4}\.\d{1,2}\.\d{1,2}/).test(date);
-  },
-};
-
-module.exports = Validator;
+  }
+}

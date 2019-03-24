@@ -1,58 +1,61 @@
-var Validator = require('../../src/Validator/Address');
+import ValidatorAddress from '../../src/Validator/Address';
 
-describe('Validator', () => {
-  describe('Address', () => {
-    /** {Validator.Address} */
-    var _sut;
+// jasmine-es6のロード
+import install from 'jasmine-es6';
 
-    /**
-     * 初期化処理
-     */
-    beforeEach(() => {
-      _sut = new Validator.Address();
+install();
+
+describe('Addressクラスのテスト', () => {
+  /** {Validator.Address} */
+  const sut = new ValidatorAddress();
+
+  /**
+   * 初期化処理
+   */
+  beforeEach(() => {
+    // pass
+  });
+
+  /**
+   * 事後処理
+   */
+  afterEach(() => {
+    // pass
+  });
+
+  describe('isValidPostCode関数のテスト', () => {
+    it('OK Pattern', () => {
+      expect(sut.isValidPostCode('123-4567')).toEqual(true);
     });
-
-    /**
-     * 事後処理
-     */
-    afterEach(() => {
-      // pass
+    it('NG Pattern', () => {
+      expect(sut.isValidPostCode('abc-defg')).toEqual(false);
     });
+  });
 
-    describe('isValidPostCode', () => {
-      it('OK Pattern', () => {
-        expect(_sut.isValidPostCode('123-4567')).toEqual(true);
-      });
-      it('NG Pattern', () => {
-        expect(_sut.isValidPostCode('abc-defg')).toEqual(false);
-      });
+  describe('isValidDateUsingSlash関数のテスト', () => {
+    it('OK Pattern', () => {
+      expect(sut.isValidDateUsingSlash('2019/01/28')).toEqual(true);
     });
-
-    describe('isValidDateUsingSlash', () => {
-      it('OK Pattern', () => {
-        expect(_sut.isValidDateUsingSlash('2019/01/28')).toEqual(true);
-      });
-      it('NG Pattern', () => {
-        expect(_sut.isValidDateUsingSlash('2019-01-28')).toEqual(false);
-      });
+    it('NG Pattern', () => {
+      expect(sut.isValidDateUsingSlash('2019-01-28')).toEqual(false);
     });
+  });
 
-    describe('isValidDateUsingHyphen', () => {
-      it('OK Pattern', () => {
-        expect(_sut.isValidDateUsingHyphen('2019-01-28')).toEqual(true);
-      });
-      it('NG Pattern', () => {
-        expect(_sut.isValidDateUsingHyphen('2019.01.28')).toEqual(false);
-      });
+  describe('isValidDateUsingHyphen関数のテスト', () => {
+    it('OK Pattern', () => {
+      expect(sut.isValidDateUsingHyphen('2019-01-28')).toEqual(true);
     });
+    it('NG Pattern', () => {
+      expect(sut.isValidDateUsingHyphen('2019.01.28')).toEqual(false);
+    });
+  });
 
-    describe('isValidDateUsingDot', () => {
-      it('OK Pattern', () => {
-        expect(_sut.isValidDateUsingDot('2019.01.28')).toEqual(true);
-      });
-      it('NG Pattern', () => {
-        expect(_sut.isValidDateUsingDot('2019/01/28')).toEqual(false);
-      });
+  describe('isValidDateUsingDot関数のテスト', () => {
+    it('OK Pattern', () => {
+      expect(sut.isValidDateUsingDot('2019.01.28')).toEqual(true);
+    });
+    it('NG Pattern', () => {
+      expect(sut.isValidDateUsingDot('2019/01/28')).toEqual(false);
     });
   });
 });

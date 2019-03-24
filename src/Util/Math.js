@@ -1,20 +1,9 @@
-/**
- * @namespace
- */
-var Validator = Validator || {};
-
-/**
- * @constructor
- */
-Validator.Math = function () {
-};
-
-Validator.Math.prototype = {
+export default class Math {
   /**
    * 階乗を算出する
    *
    * @param n
-   * @returns {number}
+   * @returns {number|undefined}
    */
   factorial(n) {
     if (n >= 2) {
@@ -24,8 +13,6 @@ Validator.Math.prototype = {
     }
 
     // 入力値がマイナスまたは無効値の場合
-    return null;
-  },
-};
-
-module.exports = Validator;
+    return undefined;
+  }
+}
