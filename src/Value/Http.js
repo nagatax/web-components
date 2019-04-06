@@ -92,3 +92,21 @@ const RESPONSE_STATUS_CODE = {
   NOT_EXTENDED: 510,
   NETWORK_AUTHENTICATION_REQUIRED: 511,
 };
+
+/**
+ * ENCTYPE
+ */
+const ENCTYPE = {
+  /**
+   * キーと値は'キー=値'と表現し、各キー値は'&'で区切りエンコードする。
+   * キーや値の英数字以外の文字は、パーセントエンコーディングする。
+   */
+  URLENCODED: 'application/x-www-form-urlencoded',
+  /**
+   * 各値はデータのブロックとして送信し、ユーザーエージェントが定義するデリミタがそれぞれの部分を区切る。
+   * キーはそれぞれのContent-Dispositionヘッダーの中で与える。
+   */
+  DATA: 'multipart/form-data',
+
+  PLAIN: 'text/plain',
+};
