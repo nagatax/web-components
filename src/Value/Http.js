@@ -1,7 +1,7 @@
 /**
  * HTTP REQUEST METHOD
  */
-const REQUEST_METHOD = {
+export const REQUEST_METHOD = {
   GET: 'GET',
   HEAD: 'HEAD',
   POST: 'POST',
@@ -16,7 +16,7 @@ const REQUEST_METHOD = {
 /**
  * HTTP RESPONSE STATUS CODE
  */
-const RESPONSE_STATUS_CODE = {
+export const RESPONSE_STATUS_CODE = {
   /**
    * Information responses
    */
@@ -96,7 +96,7 @@ const RESPONSE_STATUS_CODE = {
 /**
  * ENCTYPE
  */
-const ENCTYPE = {
+export const ENCTYPE = {
   /**
    * キーと値は'キー=値'と表現し、各キー値は'&'で区切りエンコードする。
    * キーや値の英数字以外の文字は、パーセントエンコーディングする。
