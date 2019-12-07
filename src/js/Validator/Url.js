@@ -1,4 +1,4 @@
-export default class Url {
+module.exports = class Url {
   /**
    * URLの形式か判定する
    * @param {string} url

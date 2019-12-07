@@ -1,6 +1,6 @@
 import { ENCTYPE, REQUEST_METHOD, RESPONSE_STATUS_CODE } from '../Value/Http';
 
-export default class Ajax {
+module.exports = class Ajax {
   /**
    * リソースを取得する。
    * @param {String} url

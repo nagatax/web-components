@@ -1,4 +1,4 @@
-export default class Math {
+module.exports = class Math {
   /**
    * 階乗を算出する
    *

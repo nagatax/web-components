@@ -1,4 +1,4 @@
-export default class Common {
+module.exports = class Common {
   /**
    * 文字列にパターンが含まれるか判定する
    * @param {string} str

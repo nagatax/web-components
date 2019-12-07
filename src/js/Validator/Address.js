@@ -1,4 +1,4 @@
-export default class Address {
+module.exports = class Address {
   /**
    * 郵便番号か判定する
    * @param {string} postCode

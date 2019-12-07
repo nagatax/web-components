@@ -1,6 +1,6 @@
-import { Ajax } from 'Ajax';
+import { Ajax } from 'src/js/Util/Ajax';
 
-export default class Message {
+module.exports = class Message {
   /**
    * @constructor
    */

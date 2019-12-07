@@ -1,4 +1,4 @@
-export default class Jquery {
+module.exports = class Jquery {
   /**
    * 空白の除去
    * 半角スペース/改行文字/タブ文字/全角空白を除去する

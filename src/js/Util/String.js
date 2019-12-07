@@ -1,4 +1,4 @@
-export default class String {
+module.exports = class String {
   /**
    * 文字数を取得する
    * @param {string} str
