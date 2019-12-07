@@ -1,9 +1,7 @@
-import UtilString from '../../src/Util/String';
+const UtilString = require('../../src/js/Util/String');
 
-// jasmine-es6のロード
-import install from 'jasmine-es6';
-
-install();
+// load jasmine module
+require('jasmine-es6');
 
 describe('Stringクラスのテスト', () => {
   /** {Util.String} */

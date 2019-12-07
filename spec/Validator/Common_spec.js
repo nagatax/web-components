@@ -1,9 +1,7 @@
-import ValidatorCommon from '../../src/Validator/Common';
+const ValidatorCommon = require('../../src/js/Validator/Common');
 
-// jasmine-es6のロード
-import install from 'jasmine-es6';
-
-install();
+// load jasmine module
+require('jasmine-es6');
 
 describe('Commonクラスのテスト', () => {
   /** {Validator.Common} */

@@ -1,9 +1,7 @@
-import ValidatorUrl from '../../src/Validator/Url';
+const ValidatorUrl = require('../../src/js/Validator/Url');
 
-// jasmine-es6のロード
-import install from 'jasmine-es6';
-
-install();
+// load jasmine module
+require('jasmine-es6');
 
 describe('Urlクラスのテスト', () => {
   /** {Validator.Url} */

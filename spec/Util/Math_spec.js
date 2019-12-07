@@ -1,8 +1,7 @@
-import UtilMath from '../../src/Util/Math';
+const UtilMath = require('../../src/js/Util/Math');
 
-// jasmine-es6のロード
-import install from 'jasmine-es6';
-install();
+// load jasmine module
+require('jasmine-es6');
 
 describe('Mathクラスのテスト', () => {
   /** {Util.Math} */

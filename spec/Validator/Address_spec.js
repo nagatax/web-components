@@ -1,9 +1,7 @@
-import ValidatorAddress from '../../src/Validator/Address';
+const ValidatorAddress = require('../../src/js/Validator/Address');
 
-// jasmine-es6のロード
-import install from 'jasmine-es6';
-
-install();
+// load jasmine module
+require('jasmine-es6');
 
 describe('Addressクラスのテスト', () => {
   /** {Validator.Address} */
