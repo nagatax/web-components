@@ -1,17 +1,30 @@
-// CSSを別ファイルで組み込む
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
 
 // 出力先フォルダーのクリーンアップ
-// const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+// CSSを別ファイルで組み込む
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   // エントリーポイント
-  entry: `${__dirname}/../src/index.js`,
+  entry: {
+    main: path.resolve(__dirname, '../src/index.js'),
+  },
   output: {
     // 出力先のフォルダ
-    path: `${__dirname}/../dist`,
+    path: path.resolve(__dirname, '../dist'),
     // 出力先のファイル名
-    filename: 'main.js',
+    filename: '[name]-[hash].js',
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({}),
+      new OptimizeCssAssetsPlugin({}),
+    ],
   },
   module: {
     rules: [
@@ -24,7 +37,7 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               presets: [
-                ['env', { 'modules': false }],
+                ['env', { modules: false }],
               ],
             },
           },
@@ -40,18 +53,25 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({ use: 'css-loader' }),
-      },
       // Sassの設定
       // sass-loader: Sassのコンパイル
       // -> css-loader: モジュール化
       // -> style-loader: ページに組み込む
       {
-        test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        test: /\.(scss|css)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+            },
+          },
+          'postcss-loader',
+          'sass-loader',
+        ],
       },
+      // Imageの設定
       {
         test: /\.(gif|png|jpg)$/,
         use: [
@@ -67,7 +87,19 @@ module.exports = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin('style.css'),
-    // new CleanWebpackPlugin('[dist]'),
+    new CleanWebpackPlugin(
+      ['dist'],
+      {
+        root: path.resolve(__dirname, '../'),
+        exclude: ['img'],
+      },
+    ),
+    new MiniCssExtractPlugin({
+      filename: 'style-[hash].css',
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/html/index.html',
+      filename: 'index.html',
+    }),
   ],
 };
