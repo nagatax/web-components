@@ -1,4 +1,3 @@
-import Ajax from './Util/Ajax';
-
-const ajax = new Ajax('http://192.168.34.50/index.php');
-ajax.send();
+// 使用するCSS
+// importしないと出力対象に含まれない
+import './style.css';
