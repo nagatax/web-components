@@ -1,0 +1,7 @@
+$main_width: 560px;
+
+article {
+    $padding: 7px;
+    width: $main_width - $padding * 2;
+    padding: 0 $padding;
+}
