@@ -34,15 +34,6 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: [
-          // Babelによるトランスコンパイル設定
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                ['env', { modules: false }],
-              ],
-            },
-          },
           // ESLintの設定
           {
             loader: 'eslint-loader',
@@ -51,6 +42,15 @@ module.exports = {
               fix: false,
               // エラー検出時にビルドを中断
               failOnError: false,
+            },
+          },
+          // Babelによるトランスコンパイル設定
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['env', { modules: false }],
+              ],
             },
           },
         ],
