@@ -4,6 +4,8 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 // CSSを別ファイルで組み込む
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// Check some scss files
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -96,6 +98,9 @@ module.exports = {
     ),
     new MiniCssExtractPlugin({
       filename: 'style-[hash].css',
+    }),
+    new StyleLintPlugin({
+      configFile: '.stylelintrc',
     }),
     new HtmlWebpackPlugin({
       template: './src/html/index.html',
