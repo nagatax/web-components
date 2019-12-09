@@ -1,13 +1,14 @@
+// Set current path
 const path = require('path');
-
-// 出力先フォルダーのクリーンアップ
+// Clean up files in output's folder
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// CSSを別ファイルで組み込む
+// Create some html files
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+// Separate some css files
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // Check some scss files
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
