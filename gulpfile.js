@@ -1,13 +1,20 @@
 // Gulp settings
 const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+const notify = require('gulp-notify');
+
+// html
+const htmllint = require('gulp-htmllint');
+const htmlmin = require('gulp-htmlmin');
+
+// css
 const sass = require('gulp-sass');
 const sassglob = require('gulp-sass-glob');
 const sourcemaps = require('gulp-sourcemaps');
-
-const plumber = require('gulp-plumber');
-const notify = require('gulp-notify');
 const postcss = require('gulp-postcss');
-const htmllint = require('gulp-htmllint');
+
+// delete compiled files
+const del = require('del');
 
 // Webpack settings
 const webpack = require('webpack');
@@ -33,6 +40,8 @@ const paths = {
 // html lint
 gulp.task('html', function () {
   return gulp.src(paths.html.src)
+    .pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
+    .pipe(htmlmin({removeComments: true}))
     .pipe(htmllint())
     .pipe(gulp.dest(paths.html.dest));
 });
@@ -62,5 +71,13 @@ gulp.task('watch', function () {
   gulp.watch(paths.js.src, gulp.series('javascript'));
 });
 
+// clean task
+gulp.task('clean', function () {
+  return del([
+    './dist/**/*.html',
+    './dist/**/*.css',
+  ]);
+});
+
 // default task
-gulp.task('default', gulp.parallel('watch'));
+gulp.task('default', gulp.series('clean', 'watch'));
