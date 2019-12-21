@@ -6,6 +6,8 @@ const notify = require('gulp-notify');
 // html
 const htmllint = require('gulp-htmllint');
 const htmlmin = require('gulp-htmlmin');
+const ejs = require('gulp-ejs');
+const rename = require('gulp-rename');
 
 // css
 const sass = require('gulp-sass');
@@ -35,12 +37,18 @@ const paths = {
     src: './src/js/**/*.js',
     dest: './dist/js',
   },
+  ejs: {
+    src: ['./src/ejs/**/*.ejs', '!./src/ejs/**/_*.ejs'],
+    dest: './dist/html',
+  },
 };
 
-// html lint
+// html task
 gulp.task('html', function () {
-  return gulp.src(paths.html.src)
+  return gulp.src(paths.ejs.src)
     .pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
+    .pipe(ejs())
+    .pipe(rename({extname: '.html'}))
     .pipe(htmlmin({removeComments: true}))
     .pipe(htmllint())
     .pipe(gulp.dest(paths.html.dest));
@@ -48,14 +56,14 @@ gulp.task('html', function () {
 
 // sass task
 gulp.task('sass', function () {
-  return gulp.src('./src/sass/**/*.scss')
+  return gulp.src(paths.sass.src)
     .pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
     .pipe(sourcemaps.init())
     .pipe(sassglob())
     .pipe(sass({outputStyle: 'expanded'}))
     .pipe(postcss())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./dist/css'));
+    .pipe(gulp.dest(paths.sass.dest));
 });
 
 // javascript task
@@ -74,8 +82,8 @@ gulp.task('watch', function () {
 // clean task
 gulp.task('clean', function () {
   return del([
-    './dist/**/*.html',
-    './dist/**/*.css',
+    paths.html.dest,
+    paths.sass.dest,
   ]);
 });
 
