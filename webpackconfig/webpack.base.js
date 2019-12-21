@@ -2,15 +2,6 @@
 const path = require('path');
 // Clean up files in output's folder
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// Create some html files
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-// Separate some css files
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// Check some scss files
-const StyleLintPlugin = require('stylelint-webpack-plugin');
-
-const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   // エントリーポイント
@@ -22,12 +13,6 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     // 出力先のファイル名
     filename: '[name]-[hash].js',
-  },
-  optimization: {
-    minimizer: [
-      new TerserPlugin({}),
-      new OptimizeCssAssetsPlugin({}),
-    ],
   },
   module: {
     rules: [
@@ -56,37 +41,6 @@ module.exports = {
           },
         ],
       },
-      // Sassの設定
-      // sass-loader: Sassのコンパイル
-      // -> css-loader: モジュール化
-      // -> style-loader: ページに組み込む
-      {
-        test: /\.(scss|css)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              url: false,
-            },
-          },
-          'postcss-loader',
-          'sass-loader',
-        ],
-      },
-      // Imageの設定
-      {
-        test: /\.(gif|png|jpg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 51200,
-              name: './images/[name].[ext]',
-            },
-          },
-        ],
-      },
     ],
   },
   plugins: [
@@ -94,18 +48,8 @@ module.exports = {
       ['dist'],
       {
         root: path.resolve(__dirname, '../'),
-        exclude: ['img'],
+        exclude: ['html', 'css', 'img'],
       },
     ),
-    new MiniCssExtractPlugin({
-      filename: 'style-[hash].css',
-    }),
-    new StyleLintPlugin({
-      configFile: '.stylelintrc',
-    }),
-    new HtmlWebpackPlugin({
-      template: './src/html/index.html',
-      filename: 'index.html',
-    }),
   ],
 };
