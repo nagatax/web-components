@@ -15,16 +15,20 @@ const sassglob = require('gulp-sass-glob');
 const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 
-// delete compiled files
-const del = require('del');
-
 // Webpack settings
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 const webpackConfig = require('./webpackconfig/webpack.development');
 
+// delete compiled files
+const del = require('del');
+
+// browser sync
+const browserSync = require('browser-sync');
+
 // src and dest
 const paths = {
+  root: './dist/',
   html: {
     src: './src/html/**/*.html',
     dest: './dist/html',
@@ -74,9 +78,24 @@ gulp.task('javascript', function () {
 
 // watch task
 gulp.task('watch', function () {
-  gulp.watch(paths.html.src, gulp.series('html'));
-  gulp.watch(paths.sass.src, gulp.series('sass'));
-  gulp.watch(paths.js.src, gulp.series('javascript'));
+  gulp.watch(paths.ejs.src, gulp.series('html', 'reload'));
+  gulp.watch(paths.html.src, gulp.series('html', 'reload'));
+  gulp.watch(paths.sass.src, gulp.series('sass', 'reload'));
+  gulp.watch(paths.js.src, gulp.series('javascript', 'reload'));
+});
+
+// browser sync
+gulp.task('browsersync', function () {
+  return browserSync.init({
+    server: {
+      baseDir: paths.html.dest,
+    },
+    port: 8080,
+    reloadOnRestart: true,
+  });
+});
+gulp.task('reload', function () {
+  browserSync.reload();
 });
 
 // clean task
@@ -88,4 +107,4 @@ gulp.task('clean', function () {
 });
 
 // default task
-gulp.task('default', gulp.series('clean', 'watch'));
+gulp.task('default', gulp.parallel('clean', 'watch', 'browsersync'));
