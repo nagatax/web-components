@@ -2,23 +2,22 @@
 const gulp = require('gulp');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
+const prettierPlugin = require('gulp-prettier-plugin');
+const rev = require('gulp-rev');
 
 // html
 const htmllint = require('gulp-htmllint');
 const htmlmin = require('gulp-htmlmin');
 const ejs = require('gulp-ejs');
 const rename = require('gulp-rename');
+const inject = require('gulp-inject');
 
 // css
 const sass = require('gulp-sass');
 const sassglob = require('gulp-sass-glob');
 const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
-
-// Webpack settings
-const webpack = require('webpack');
-const webpackStream = require('webpack-stream');
-const webpackConfig = require('./webpackconfig/webpack.development');
+const stylelint = require('gulp-stylelint');
 
 // delete compiled files
 const del = require('del');
@@ -26,9 +25,14 @@ const del = require('del');
 // browser sync
 const browserSync = require('browser-sync');
 
+// Webpack settings
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
+const webpackConfig = require('./webpackconfig/webpack.development');
+
 // src and dest
 const paths = {
-  root: './dist/',
+  root: __dirname,
   html: {
     src: './src/html/**/*.html',
     dest: './dist/html',
@@ -47,45 +51,53 @@ const paths = {
   },
 };
 
+// clean task
+gulp.task('clean', () => {
+  return del([
+    paths.html.dest,
+    paths.sass.dest,
+  ]);
+});
+
 // html task
-gulp.task('html', function () {
+gulp.task('html', () => {
+  const sources = gulp.src([`${paths.sass.dest}/*.css`, `${paths.js.dest}/*.js`]);
+
   return gulp.src(paths.ejs.src)
-    .pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
+    .pipe(plumber({ errorHandler: notify.onError('Error: <%= error.message %>') }))
     .pipe(ejs())
-    .pipe(rename({extname: '.html'}))
-    .pipe(htmlmin({removeComments: true}))
+    .pipe(rename({ extname: '.html' }))
+    .pipe(inject(sources))
+    .pipe(htmlmin({ removeComments: true }))
+    .pipe(prettierPlugin())
     .pipe(htmllint())
     .pipe(gulp.dest(paths.html.dest));
 });
 
 // sass task
-gulp.task('sass', function () {
+gulp.task('sass', () => {
   return gulp.src(paths.sass.src)
-    .pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
+    .pipe(plumber({ errorHandler: notify.onError('Error: <%= error.message %>') }))
     .pipe(sourcemaps.init())
     .pipe(sassglob())
-    .pipe(sass({outputStyle: 'expanded'}))
+    .pipe(sass({ outputStyle: 'expanded' }))
     .pipe(postcss())
     .pipe(sourcemaps.write())
+    .pipe(prettierPlugin())
+    .pipe(rev())
+    .pipe(stylelint())
     .pipe(gulp.dest(paths.sass.dest));
 });
 
 // javascript task
-gulp.task('javascript', function () {
+gulp.task('javascript', () => {
   return webpackStream(webpackConfig, webpack)
+    .pipe(prettierPlugin())
     .pipe(gulp.dest(paths.js.dest));
 });
 
-// watch task
-gulp.task('watch', function () {
-  gulp.watch(paths.ejs.src, gulp.series('html', 'reload'));
-  gulp.watch(paths.html.src, gulp.series('html', 'reload'));
-  gulp.watch(paths.sass.src, gulp.series('sass', 'reload'));
-  gulp.watch(paths.js.src, gulp.series('javascript', 'reload'));
-});
-
 // browser sync
-gulp.task('browsersync', function () {
+gulp.task('browsersync', () => {
   return browserSync.init({
     server: {
       baseDir: paths.html.dest,
@@ -94,17 +106,19 @@ gulp.task('browsersync', function () {
     reloadOnRestart: true,
   });
 });
-gulp.task('reload', function () {
+gulp.task('reload', (done) => {
   browserSync.reload();
+  done();
 });
 
-// clean task
-gulp.task('clean', function () {
-  return del([
-    paths.html.dest,
-    paths.sass.dest,
-  ]);
+// watch task
+gulp.task('watch', (done) => {
+  gulp.watch(paths.ejs.src, gulp.series('html', 'reload'));
+  gulp.watch(paths.html.src, gulp.series('html', 'reload'));
+  gulp.watch(paths.sass.src, gulp.series('sass', 'reload'));
+  gulp.watch(paths.js.src, gulp.series('javascript', 'reload'));
+  done();
 });
 
 // default task
-gulp.task('default', gulp.parallel('clean', 'watch', 'browsersync'));
+gulp.task('default', gulp.parallel(gulp.series('clean', 'sass', 'javascript', 'html'), 'watch', 'browsersync'));

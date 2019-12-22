@@ -25,7 +25,7 @@ module.exports = {
             loader: 'eslint-loader',
             options: {
               // autofixモード
-              fix: false,
+              fix: true,
               // エラー検出時にビルドを中断
               failOnError: false,
             },

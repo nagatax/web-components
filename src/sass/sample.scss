@@ -1,7 +1,9 @@
-$main_width: 560px;
+$nameList: top, about, company, contact;
 
-article {
-    $padding: 7px;
-    width: $main_width - $padding * 2;
-    padding: 0 $padding;
+@each $name in $nameList {
+    .body-#{$name} {
+        background-image: url(../img/bg_#{$name}.png);
+    }
 }
+
+@debug 10em
