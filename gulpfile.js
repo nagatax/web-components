@@ -61,7 +61,7 @@ gulp.task('clean', () => {
 
 // html task
 gulp.task('html', () => {
-  const sources = gulp.src([`${paths.sass.dest}/*.css`, `${paths.js.dest}/*.js`]);
+  const sources = gulp.src(["css/*.css", "js/*.js"]);
 
   return gulp.src(paths.ejs.src)
     .pipe(plumber({ errorHandler: notify.onError('Error: <%= error.message %>') }))
