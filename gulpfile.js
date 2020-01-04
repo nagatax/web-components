@@ -101,6 +101,7 @@ gulp.task('browsersync', () => {
   return browserSync.init({
     server: {
       baseDir: paths.html.dest,
+      index: "index/index.html"
     },
     port: 8080,
     reloadOnRestart: true,
