@@ -61,13 +61,13 @@ gulp.task('clean', () => {
 
 // html task
 gulp.task('html', () => {
-  const sources = gulp.src(["css/*.css", "js/*.js"]);
+  const sources = gulp.src([`${paths.sass.dest}/*.css`, `${paths.js.dest}/*.js`]);
 
   return gulp.src(paths.ejs.src)
     .pipe(plumber({ errorHandler: notify.onError('Error: <%= error.message %>') }))
     .pipe(ejs())
     .pipe(rename({ extname: '.html' }))
-    .pipe(inject(sources))
+    .pipe(inject(sources, { ignorePath: '/dist/'}))
     .pipe(htmlmin({ removeComments: true }))
     .pipe(prettierPlugin())
     .pipe(htmllint())
@@ -100,8 +100,8 @@ gulp.task('javascript', () => {
 gulp.task('browsersync', () => {
   return browserSync.init({
     server: {
-      baseDir: paths.html.dest,
-      index: "index/index.html"
+      baseDir: './dist',
+      index: 'html/index/index.html',
     },
     port: 8080,
     reloadOnRestart: true,
