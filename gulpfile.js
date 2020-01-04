@@ -34,15 +34,15 @@ const webpackConfig = require('./webpackconfig/webpack.development');
 const paths = {
   root: __dirname,
   html: {
-    src: './src/html/**/*.html',
+    src: ['./src/html/**/*.html'],
     dest: './dist/html',
   },
   sass: {
-    src: './src/sass/**/*.scss',
+    src: ['./src/sass/**/*.scss'],
     dest: './dist/css',
   },
   js: {
-    src: './src/js/**/*.js',
+    src: ['./src/js/**/*.js'],
     dest: './dist/js',
   },
   ejs: {
