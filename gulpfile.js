@@ -114,10 +114,10 @@ gulp.task('reload', (done) => {
 
 // watch task
 gulp.task('watch', (done) => {
-  gulp.watch(paths.ejs.src, gulp.series('sass', 'javascript', 'html', 'reload'));
-  gulp.watch(paths.html.src, gulp.series('sass', 'javascript', 'html', 'reload'));
-  gulp.watch(paths.sass.src, gulp.series('sass', 'javascript', 'html', 'reload'));
-  gulp.watch(paths.js.src, gulp.series('sass', 'javascript', 'html', 'reload'));
+  gulp.watch(
+    paths.ejs.src.concat(paths.html.src, paths.sass.src, paths.js.src),
+    gulp.series('clean', 'sass', 'javascript', 'html', 'reload')
+  );
   done();
 });
 
