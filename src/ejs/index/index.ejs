@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../common/_meta.ejs', {title:"TOP PAGE"}); %>
+</head>
+
+<body>
+  <%# header %>
+  <%- include('../common/_header.ejs'); %>
+
+  <%# main %>
+  <div class="conatiner">
+    <main class="contents"></main>
+    <aside class="sidemenu"></aside>
+  </div>
+
+  <%# footer %>
+  <%- include('../common/_footer.ejs'); %>
+
+  <%# javascript %>
+  <!-- inject:js -->
+  <!-- endinject -->
+</body>
+
+</html>
