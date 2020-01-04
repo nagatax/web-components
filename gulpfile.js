@@ -114,12 +114,12 @@ gulp.task('reload', (done) => {
 
 // watch task
 gulp.task('watch', (done) => {
-  gulp.watch(paths.ejs.src, gulp.series('html', 'reload'));
-  gulp.watch(paths.html.src, gulp.series('html', 'reload'));
-  gulp.watch(paths.sass.src, gulp.series('sass', 'reload'));
-  gulp.watch(paths.js.src, gulp.series('javascript', 'reload'));
+  gulp.watch(paths.ejs.src, gulp.series('sass', 'javascript', 'html', 'reload'));
+  gulp.watch(paths.html.src, gulp.series('sass', 'javascript', 'html', 'reload'));
+  gulp.watch(paths.sass.src, gulp.series('sass', 'javascript', 'html', 'reload'));
+  gulp.watch(paths.js.src, gulp.series('sass', 'javascript', 'html', 'reload'));
   done();
 });
 
 // default task
-gulp.task('default', gulp.parallel(gulp.series('clean', 'sass', 'javascript', 'html'), 'watch', 'browsersync'));
+gulp.task('default', gulp.parallel(gulp.series('clean', 'sass', 'javascript', 'html', 'browsersync'), 'watch'));
