@@ -19,6 +19,9 @@ const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const stylelint = require('gulp-stylelint');
 
+// image
+const imagemin = require('gulp-imagemin');
+
 // delete compiled files
 const del = require('del');
 
@@ -48,6 +51,10 @@ const paths = {
   ejs: {
     src: ['./src/ejs/**/*.ejs', '!./src/ejs/**/_*.ejs'],
     dest: './dist/html',
+  },
+  image: {
+    src: ['./src/img/**/*.jpg'],
+    dest: './dist/img'
   },
 };
 
@@ -96,6 +103,13 @@ gulp.task('javascript', () => {
     .pipe(gulp.dest(paths.js.dest));
 });
 
+// image task
+gulp.task('image', () => {
+  return gulp.src(paths.image.src)
+    .pipe(imagemin())
+    .pipe(gulp.dest(paths.image.dest));
+});
+
 // browser sync
 gulp.task('browsersync', () => {
   return browserSync.init({
@@ -116,10 +130,10 @@ gulp.task('reload', (done) => {
 gulp.task('watch', (done) => {
   gulp.watch(
     paths.ejs.src.concat(paths.html.src, paths.sass.src, paths.js.src),
-    gulp.series('clean', 'sass', 'javascript', 'html', 'reload')
+    gulp.series('clean', 'sass', 'javascript', 'image', 'html', 'reload')
   );
   done();
 });
 
 // default task
-gulp.task('default', gulp.parallel(gulp.series('clean', 'sass', 'javascript', 'html', 'browsersync'), 'watch'));
+gulp.task('default', gulp.parallel(gulp.series('clean', 'sass', 'javascript', 'image', 'html', 'browsersync'), 'watch'));
