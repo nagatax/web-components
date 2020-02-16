@@ -51,4 +51,4 @@ module.exports = class Message {
 
     ajax.send();
   }
-}
+};

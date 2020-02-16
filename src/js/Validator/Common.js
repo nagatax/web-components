@@ -13,4 +13,4 @@ module.exports = class Common {
     // 正規表現リテラル
     return (new RegExp(pattern)).test(str);
   }
-}
+};

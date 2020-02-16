@@ -61,4 +61,4 @@ module.exports = class Address {
     // 正規表現リテラル
     return (/\d{4}\.\d{1,2}\.\d{1,2}/).test(date);
   }
-}
+};

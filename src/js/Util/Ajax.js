@@ -44,7 +44,7 @@ module.exports = class Ajax {
 
     // リクエストヘッダを設定する
     // (open関数の後に記載すること)
-    Object.keys(headers).forEach((key) => {
+    Object.keys(headers).forEach(key => {
       xhr.setRequestHeader(headers[key].name, headers[key].value);
     });
 
@@ -78,4 +78,4 @@ module.exports = class Ajax {
   error() {
     return this;
   }
-}
+};

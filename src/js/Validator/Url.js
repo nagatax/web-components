@@ -27,4 +27,4 @@ module.exports = class Url {
     // 正規表現リテラル
     return (/^https/).test(url);
   }
-}
+};

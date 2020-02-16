@@ -9,4 +9,4 @@ module.exports = class Function {
   required() {
     throw new Error('引数が不足しています');
   }
-}
+};

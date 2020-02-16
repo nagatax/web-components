@@ -10,4 +10,4 @@ module.exports = class String {
     }
     return str.split(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g).length;
   }
-}
+};

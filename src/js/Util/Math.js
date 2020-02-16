@@ -15,4 +15,4 @@ module.exports = class Math {
     // 入力値がマイナスまたは無効値の場合
     return undefined;
   }
-}
+};

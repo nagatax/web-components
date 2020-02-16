@@ -13,4 +13,4 @@ module.exports = class Jquery {
   trim(str) {
     return $.trim(str);
   }
-}
+};
