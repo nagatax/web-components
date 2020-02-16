@@ -10,26 +10,16 @@ module.exports = {
   },
   output: {
     // 出力先のフォルダ
-    path: path.resolve(__dirname, '../dist'),
+    // path: path.resolve(__dirname, '../dist'),
     // 出力先のファイル名
-    filename: '[name]-[hash].js',
+    filename: '[name].js',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: /(node_modules | dist)/,
         use: [
-          // ESLintの設定
-          {
-            loader: 'eslint-loader',
-            options: {
-              // autofixモード
-              fix: true,
-              // エラー検出時にビルドを中断
-              failOnError: false,
-            },
-          },
           // Babelによるトランスコンパイル設定
           {
             loader: 'babel-loader',
@@ -37,6 +27,16 @@ module.exports = {
               presets: [
                 ['env', { modules: false }],
               ],
+            },
+          },
+          // ESLintの設定
+          {
+            loader: 'eslint-loader',
+            options: {
+              // autofixモード
+              fix: false,
+              // エラー検出時にビルドを中断
+              failOnError: false,
             },
           },
         ],

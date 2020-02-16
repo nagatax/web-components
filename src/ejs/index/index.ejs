@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 
-  <%- include('../common/_head', {title:"TOP PAGE"}); %>
+<%- include('../common/_head', {pageTitle:"TOP PAGE"}); %>
 
 <body>
   <%# header %>
   <%- include('../common/_header'); %>
 
   <%# main %>
-  <div class="conatiner">
-    <main class="contents"></main>
+  <div id="container" class="conatiner" style="width: 400px;">
+    <main class="contents">
+      contents
+    </main>
     <aside class="sidemenu"></aside>
   </div>
 

@@ -3,7 +3,7 @@ const gulp = require('gulp');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 const prettierPlugin = require('gulp-prettier-plugin');
-const rev = require('gulp-rev');
+const replace = require('gulp-replace');
 
 // html
 const htmllint = require('gulp-htmllint');
@@ -76,6 +76,8 @@ gulp.task('html', () => {
     .pipe(rename({ extname: '.html' }))
     .pipe(inject(sources, { ignorePath: '/dist/'}))
     .pipe(htmlmin({ removeComments: true }))
+    .pipe(replace('.css"', `.css?${Date.now().toString()}"`))
+    .pipe(replace('.js"', `.js?${Date.now().toString()}"`))
     .pipe(prettierPlugin())
     .pipe(htmllint())
     .pipe(gulp.dest(paths.html.dest));
@@ -91,7 +93,6 @@ gulp.task('sass', () => {
     .pipe(postcss())
     .pipe(sourcemaps.write())
     .pipe(prettierPlugin())
-    .pipe(rev())
     .pipe(stylelint())
     .pipe(gulp.dest(paths.sass.dest));
 });
@@ -99,7 +100,7 @@ gulp.task('sass', () => {
 // javascript task
 gulp.task('javascript', () => {
   return webpackStream(webpackConfig, webpack)
-    .pipe(prettierPlugin())
+      // .pipe(prettierPlugin())
     .pipe(gulp.dest(paths.js.dest));
 });
 
